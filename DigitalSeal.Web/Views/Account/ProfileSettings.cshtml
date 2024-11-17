@@ -1,0 +1,101 @@
+﻿@model DigitalSeal.Web.Models.ViewModels.Account.ProfileSettingsViewModel
+
+@{
+    ViewData["Title"] = "Profile Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="profile-settings">
+    <h1>Profile Settings</h1>
+
+    <hr />
+    <div class="row m-auto">
+        <div class="col-md-4">
+            <form asp-action="UpdateProfile">
+                <input asp-for="HasPassword" type="hidden" />
+                <input asp-for="CanDeactivateAccount" type="hidden" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="toggle-container">
+                        <div class="toggle-button">
+                            <input type="checkbox" asp-for="Is2FAEnabled" class="mobileToggle">
+                            <label asp-for="Is2FAEnabled" />
+                        </div>
+                        <p>@Html.DisplayNameFor(model => model.Is2FAEnabled)</p>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                @if (Model.HasPassword)
+                {
+                    <div class="form-group">
+                        <label asp-for="CurrentPassword" class="control-label"></label>
+                        <input asp-for="CurrentPassword" class="form-control" />
+                        <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewPassword" class="control-label"></label>
+                        <input asp-for="NewPassword" class="form-control" />
+                        <span asp-validation-for="NewPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword" class="control-label"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                }
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="button primary-button" />
+                </div>
+            </form>
+
+            <br />
+
+            @if (Model.CanDeactivateAccount)
+            {
+                @* TODO: Could use the modal partial instead. *@
+
+                @* Button trigger modal *@
+                <button type="button" class="button deactivate-button" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                    Deactivate Account
+                </button>
+                @* Modal *@
+                <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmModalLabel">Are you sure you want to delete your account?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                This action is irreversible and will delete all data associated with your account.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="button primary-button" data-bs-dismiss="modal">Cancel</button>
+                                <form asp-action="DeactivateAccount">
+                                    <input type="submit" value="Deactivate" class="button danger-button" />
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,163 @@
+﻿@using DigitalSeal.Web.Models.ViewModels.OrgEdit
+@model OrgEditViewModel
+
+@{
+    Layout = "_EditLayout";
+    ViewData["Title"] = $"{Model.Name} organization";
+}
+
+@section Scripts {
+    <script src="~/js/orgEdit.js" asp-append-version="true" type="module"></script>
+}
+
+@section ToolbarButtons {
+    <button class="fa-icon-button with-title large disable-if-current" id="switch-org-button" @(Model.IsCurrent ? "disabled" : "")>
+        <i class="fa-solid fa-building-user"></i>
+        <span>Set as Current</span>
+    </button>
+    @if (!Model.IsOwner)
+    {
+        <button class="fa-icon-button with-title large disable-if-current" id="leave-org-button" @(Model.IsCurrent ? "disabled" : "") data-bs-toggle="modal" data-bs-target="#confirm-org-leave-modal">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Leave organization</span>
+        </button>
+        <partial name="_ConfirmationModal" model="@(new ConfirmationModalModel
+        {
+            Id = "confirm-org-leave-modal",
+            Title = "Are you sure you want to leave this organization?",
+            Body = "This action is irreversible and will delete all data associated with the organization, including your documents",
+            MainButtonTitle = "Leave",
+            ButtonType = ButtonType.Danger
+        })" />
+    }
+
+    @if (Model.IsOwner)
+    {
+        <button class="fa-icon-button with-title large" id="delete-button" data-bs-toggle="modal" data-bs-target="#confirm-org-delete-modal">
+            <i class="fa-solid fa-trash"></i>
+            <span>Delete</span>
+        </button>
+        <partial name="_ConfirmationModal" model="@(new ConfirmationModalModel
+        {
+            Id = "confirm-org-delete-modal",
+            Title = "Are you sure you want to delete this organization?",
+            Body = "This action is irreversible and will delete all data associated with the organization",
+            MainButtonTitle = "Delete",
+            ButtonType = ButtonType.Danger
+        })" />
+    }
+}
+
+@section Details {
+    <div class="details">
+        <div class="editable-input detail-row" id="name-input-container">
+            <div class="info-label">
+                <label for="Name" class="form-label">Name</label>
+            </div>
+            <div class="wrapper">
+                <div class="input-container default-mode">
+                    <span class="value">@Model.Name</span>
+                    <button class="edit-input-btn fa-icon-button start-edit-button">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+                </div>
+
+                <div class="input-container edit-mode hidden">
+
+                    <form asp-action="@nameof(OrgEditController.Update)">
+                        <input asp-for="Name" class="form-input" />
+                        <span asp-validation-for="Name" class="text-danger validation-text"></span>
+                        <input asp-for="OrgId" type="hidden" />
+                    </form>
+
+                    <button class="edit-input-btn fa-icon-button save-edit-button">
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+                    <button class="edit-input-btn fa-icon-button cancel-edit-button">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-row">
+            <div class="info-label">
+                <span>Owner</span>
+            </div>
+            <div class="info-text">
+                <span>@Model.OwnerName</span>
+            </div>
+        </div>
+
+        <div class="detail-row">
+            <div class="info-label">
+                <span>Created at</span>
+            </div>
+            <div class="info-text">
+                <span>@Model.CreatedDate</span>
+            </div>
+        </div>
+    </div>
+}
+
+<div id="org-page" class="d-flex flex-column">
+    <nav class="my-3">
+        <div class="nav nav-tabs" id="page-tab" role="tablist">
+            <button data-index="0" class="nav-link active" id="nav-users-tab" data-bs-toggle="tab" data-bs-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="true">
+                <h6>Members</h6>
+            </button>
+            <button data-index="1" class="nav-link" id="nav-requests-tab" data-bs-toggle="tab" data-bs-target="#nav-requests" type="button" role="tab" aria-controls="nav-requests" aria-selected="false">
+                <h6>Pending invites</h6>
+            </button>
+        </div>
+    </nav>
+    <div class="tab-content d-flex flex-grow-1" id="nav-tabContent">
+        <div class="tab-pane fade show active w-100" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
+            <div id="party-list-container" class="d-flex flex-grow-1 flex-column">
+                <div class="mb-3 d-flex flex-row">
+                    <button class="fa-icon-button with-title large" data-bs-toggle="modal" data-bs-target="#possible-party-modal">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Invite</span>
+                    </button>
+
+
+
+                    <partial name="_GridModal" model="@(new GridModal
+                    {
+                        Id = "possible-party-modal",
+                        GridId = "possible-party-list",
+                        Title = "Choose invitees for the organization",
+                        ColumnDefs = Model.PossiblePartyColumnDefs,
+                        MainButtonTitle = "Send invitations",
+                    })" />
+                    @if (Model.IsOwner)
+                    {
+                        <button class="fa-icon-button with-title large need-selection init-delete-party" disabled data-bs-toggle="modal" data-bs-target="#confirm-party-remove-modal">
+                            <i class="fa-solid fa-trash"></i>
+                            <span>Kick out</span>
+                        </button>
+                        <partial name="_ConfirmationModal" model="@(new ConfirmationModalModel
+                        {
+                            Id = "confirm-party-remove-modal",
+                            Title = "Are you sure you want to kick these users out of the organization?",
+                            Body = "They will lose all documents and data associated with this organization",
+                            MainButtonTitle = "Kick out",
+                            ButtonType = ButtonType.Danger
+                        })" />
+                    }
+                </div>
+
+                <div id="party-list" class="ag-theme-quartz data-grid" style="height: 30vh" data-column-defs="@Model.PartyColumnDefs"></div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade show w-100" id="nav-requests" role="tabpanel" aria-labelledby="nav-requests-tab">
+            <div id="pending-party-list" class="ag-theme-quartz data-grid" style="height: 30vh" data-column-defs="@Model.PendingPartyColumnDefs"></div>
+        </div>
+
+    </div>
+</div>
+
+<input asp-for="OrgId" type="hidden" class="object-id" />
+<input id="@nameof(Model.IsOwner)" value="@Model.IsOwner" type="hidden" />
+<input class="validate-timezone" value="true" type="hidden" />

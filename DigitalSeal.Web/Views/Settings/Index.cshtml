@@ -1,0 +1,33 @@
+﻿@using DigitalSeal.Web.Models.ViewModels.Settings;
+@model SettingsViewModel
+
+@{
+    ViewData["Title"] = "Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section AddEnviroment {
+    <link rel="stylesheet" href="~/css/settings.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/settings.js" asp-append-version="true" type="module"></script>
+}
+
+<div class="settings-page container-fluid">
+    <div class="header">
+        <h2>Settings</h2>
+        <hr />
+    </div>
+    <nav>
+        <div class="nav nav-tabs" id="page-tab" role="tablist">
+            <button data-index="0" class="nav-link active" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile Settings</button>
+        </div>
+    </nav>
+    <div class="tab-content d-flex flex-grow-1" id="nav-tabContent">
+
+        <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <partial name="_ProfileSettingsPartial.cshtml" />
+        </div>
+    </div>
+</div>

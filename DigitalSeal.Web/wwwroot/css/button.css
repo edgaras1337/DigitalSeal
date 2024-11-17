@@ -1,0 +1,68 @@
+﻿.button {
+    position: relative;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 8px 30px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+    .button.primary-button {
+        background-color: var(--dark-primary-button);
+        color: var(--dark-primary-button-text);
+    }
+
+        .button.primary-button:not(:disabled):not(.hover-disable):hover,
+        .button.primary-button:not(:disabled):not(.hover-disable):active {
+            background-color: var(--dark-primary-button-hover);
+        }
+
+    .button.secondary-button {
+        background-color: var(--dark-secondary-button);
+        border: 1px solid var(--dark-secondary-button-border);
+        color: var(--dark-secondary-button-text);
+    }
+
+        .button.secondary-button:not(:disabled):not(.hover-disable):hover,
+        .button.secondary-button:not(:disabled):not(.hover-disable):active {
+            background-color: var(--dark-secondary-button-hover);
+        }
+
+    .button.danger-button {
+        background-color: var(--dark-danger-button);
+        color: var(--dark-danger-button-text);
+    }
+
+        .button.danger-button:not(:disabled):not(.hover-disable):hover,
+        .button.danger-button:not(:disabled):not(.hover-disable):active {
+            background-color: var(--dark-danger-button-hover);
+        }
+
+    .button:disabled {
+        background-color: var(--disabled-button);
+        color: var(--disabled-button-text);
+        cursor: default;
+        border: 1px solid var(--dark-secondary-button-border);
+    }
+
+    .button .loading-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+.google-button {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 18rem;
+}
+
+    .google-button img {
+        margin-right: 0.5rem;
+    }

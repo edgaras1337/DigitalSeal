@@ -1,0 +1,60 @@
+﻿@model DigitalSeal.Web.Models.ViewModels.Account.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Account/_Layout.cshtml";
+}
+
+<h2 class="pt-3">Register</h2>
+<hr />
+<div id="register-page">
+    <div class="small-form">
+        <form asp-action="@nameof(AccountController.RegisterForm)" method="post">
+            <input asp-for="IsExternalLogin" class="hidden" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            @if (Model != null && Model.IsExternalLogin)
+            {
+                <input asp-for="Email" type="hidden" />
+            }
+            else
+            {
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword" class="control-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            }
+
+            <div class="form-group">
+                <button type="submit" class="button primary-button form-submit">Register</button>
+            </div>
+        </form>
+    </div>
+    <div>
+        <span>
+            Already signed up?
+            <a asp-action="@nameof(AccountController.Login)">Login</a>
+        </span>
+    </div>
+</div>

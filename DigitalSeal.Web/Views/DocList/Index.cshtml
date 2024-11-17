@@ -1,0 +1,40 @@
+﻿@using DigitalSeal.Web.Services
+@{
+    ViewData["Title"] = "Documents";
+    Layout = "_ListPageLayout";
+}
+
+@section Scripts {
+    <script src="~/js/docList.js" asp-append-version="true" type="module"></script>
+}
+
+@section ToolbarButtons {
+    <input type="file" name="File" style="display: none" id="file-input" />
+    <button class="fa-icon-button add-button">
+        <i class="fa-solid fa-plus"></i>
+    </button>
+
+    <button class="fa-icon-button edit-button need-selection single" id="edit-button" disabled>
+        <i class="fa-solid fa-pen"></i>
+    </button>
+
+    <button class="fa-icon-button sign-button need-selection" id="sign-button" disabled>
+        <i class="fa-solid fa-file-signature"></i>
+    </button>
+
+    <button class="fa-icon-button delete-button need-selection" id="delete-button" data-bs-toggle="modal" data-bs-target="#confirm-doc-delete-modal" disabled>
+        <i class="fa-solid fa-trash"></i>
+    </button>
+}
+
+@{
+    var confirmationModal = new ConfirmationModalModel
+    {
+        Id = "confirm-doc-delete-modal",
+        Title = "Are you sure you want to delete selected documents?",
+        Body = "This action is irreversible and will delete all data associated with documents",
+        MainButtonTitle = "Delete",
+        ButtonType = ButtonType.Danger,
+    };
+}
+<partial name="_ConfirmationModal" model="@confirmationModal" /> 

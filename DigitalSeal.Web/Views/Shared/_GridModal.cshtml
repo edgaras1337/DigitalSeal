@@ -1,0 +1,25 @@
+﻿@using DigitalSeal.Web.Models
+
+@model GridModal
+
+<div class="modal fade modal-grid-container" id="@Model.Id" tabindex="-1" aria-labelledby="@($"{Model.Id}-label")" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="@($"{Model.GridId}-container")">
+            <div class="modal-header justify-content-center">
+                <h5 class="modal-title" id="@($"{Model.Id}-label")">@Model.Title</h5>
+            </div>
+            <div class="modal-body">
+                <div class="table-wrapper">
+                    <div class="ag-theme-quartz data-grid" id="@Model.GridId" data-column-defs="@Model.ColumnDefs"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <simple-button title="Close" button-type="Secondary" data-bs-dismiss="modal" />
+                @if (!string.IsNullOrEmpty(Model.MainButtonTitle))
+                {
+                    <simple-button class="confirm-button need-selection" title="@Model.MainButtonTitle" is-server-action="true" />
+                }
+            </div>
+        </div>
+    </div>
+</div>

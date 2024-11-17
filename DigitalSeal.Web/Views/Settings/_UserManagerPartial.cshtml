@@ -1,0 +1,24 @@
+﻿@* <div id="users-list-container" class="d-flex flex-column flex-grow-1 ">
+    <div class="my-3">
+        <button disabled id="delete-btn" class="button danger-button need-selection" role="button" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>
+    </div>
+    <div id="users-list" class="ag-theme-alpine data-grid h-100"></div>
+</div>
+
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Are you sure you want to delete selected user accounts?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                This action is irreversible and will delete all data associated with selected users.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button primary-button" data-bs-dismiss="modal">Cancel</button>
+                <button id="delete-confirm-btn" type="button" class="button danger-button" data-bs-dismiss="modal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div> *@

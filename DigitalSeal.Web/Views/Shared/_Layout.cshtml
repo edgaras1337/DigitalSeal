@@ -1,0 +1,93 @@
+﻿@using DigitalSeal.Core.Utilities
+@using DigitalSeal.Data.Models
+@using Microsoft.AspNetCore.Identity;
+@using System.Security.Claims;
+
+@inject UserManager<User> UserManager
+@{
+    User? user = null;
+    string? firstName = null;
+    try
+    {
+        user = await UserManager.GetUserAsync(User);
+    }
+    catch { }
+
+    firstName = user?.FirstName;
+    bool isAdmin = User?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role && c.Value == nameof(RoleCode.Admin)) != null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <partial name="_SharedStylesPartial" />
+
+    @* AG GRID *@
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+    <!-- Include the core CSS, this is needed by the grid -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css" />
+    <!-- Include the theme CSS, only need to import the theme you are going to use -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-quartz.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-material.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+    <partial name="_FontPartial" />
+
+    <script src="https://kit.fontawesome.com/7a12d46d62.js" crossorigin="anonymous"></script>
+
+    @RenderSection("AddEnviroment", false)
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <nav class="navbar navbar-expand navbar-light box-shadow">
+                <div class="container-fluid">
+                    <a class="navbar-brand" asp-area="" asp-controller="@StringHelper.ControllerName(nameof(DocListController))" asp-action="@nameof(DocListController.Index)">Digital Seal</a>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown user-menu">
+                            <a class="nav-link dropdown-toggle position-relative" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="user-dropdown-text">Hi, @firstName!</span>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification-bubble hidden"></span>
+                            </a>
+                            <ul class="dropdown-menu-end dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+                                <li><a class="dropdown-item" asp-area="" asp-controller="@StringHelper.ControllerName(nameof(OrgListController))" asp-action="@nameof(OrgListController.Index)">Organizations</a></li>
+                                <li>
+                                    <a class="dropdown-item list-item position-relative" asp-area="" asp-controller="@StringHelper.ControllerName(nameof(NotificationsController))" asp-action="@nameof(NotificationsController.Index)">
+                                        <span>Messages</span>
+                                        <span class="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger notification-bubble hidden"></span>
+                                    </a>
+                                </li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="@StringHelper.ControllerName(nameof(SettingsController))" asp-action="@nameof(SettingsController.Index)">Settings</a></li>
+                                <li><a class="dropdown-item" asp-controller="Account" asp-action="Logout">Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="body-wrapper py-4 px-2 p-md-4 h-100 flex-grow-1 d-flex flex-column">
+            @RenderBody()
+        </div>
+
+        <footer class="footer page-footer text-muted">
+            <div class="container">
+                &copy; 2023 - Digital Seal
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script src="~/js/site.js" asp-append-version="true" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    @await Component.InvokeAsync("Notyf")
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,103 @@
+﻿@using DigitalSeal.Data.Models
+@using Microsoft.Extensions.Localization;
+@model SignatureViewModel
+@inject IStringLocalizer<SignatureController> Localizer;
+
+@{
+    ViewData["Title"] = "Signing Documents";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section AddEnviroment {
+    <link rel="stylesheet" href="~/css/signPage.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/signature.js" asp-append-version="true"></script>
+}
+
+<h2>Sign documents</h2>
+<hr />
+<div class="">
+    <div class="sign-page">
+        <div class="selected-docs">
+            <h4>Selected documents</h4>
+            <div class="doc-names">
+                @for (int i = 0; i < Model.DocIds.Length; i++)
+                {
+                    <div>@Model.DocIds[i]: @Model.DocNames[i]</div>
+                }
+            </div>
+        </div>
+
+        <div class="sign-form">
+            <h4>Signature information</h4>
+            <form method="post" asp-action="@(nameof(SignatureController.SignDocument))">
+                <div id="docs-to-sign">
+                    @for (int i = 0; i < Model.DocIds.Length; i++)
+                    {
+                        <input type="hidden" name="@($"{nameof(Model.DocIds)}[{i}]")" value="@Model.DocIds[i]" />
+                    }
+                </div>
+                <div class="form-group">
+                    <label for="reason">Reason</label>
+                    <input asp-for="Reason" class="form-control" id="reason" placeholder="Enter the signature purpose">
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input asp-for="Location" class="form-control" id="location" placeholder="Enter the signing location">
+                </div>
+                <div class="form-group">
+                    <label for="contact-info">Contact Information</label>
+                    <input asp-for="Contact" class="form-control" id="contact-info" placeholder="Enter the contact information">
+                </div>
+                <div class="row sign-location">
+                    <div class="col">
+                        <label for="signature-page">Signature page</label>
+                        <select asp-for="Page" class="form-control" id="page-select">
+                            @foreach (SignaturePage item in Enum.GetValues(typeof(SignaturePage)))
+                            {
+                                <option value="@((int)item)">@Localizer[item.ToString()]</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="signature-location">Signature location</label>
+                        <select asp-for="Position" class="form-control" id="position-select">
+                            @if (Model.DocIds.Count() > 1)
+                            {
+                                <option value="@((int)SignaturePosition.Hidden)">@Localizer[nameof(SignaturePosition.Hidden)]</option>
+                            }
+                            else
+                            {
+                                @foreach (SignaturePosition item in Enum.GetValues(typeof(SignaturePosition)))
+                                {
+                                    <option value="@((int)item)">@Localizer[item.ToString()]</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    @if (Model.HiddenPositionsByPage != null)
+                    {
+                        @foreach (var pair in Model.HiddenPositionsByPage)
+                        {
+                            @foreach (var item in pair.Value)
+                            {
+                                <input type="hidden" data-page="@((int)pair.Key)" data-position="@((int)item)" />
+                            }
+                        }
+                    }
+                </div>
+                <div class="row buttons">
+                    <div class="col">
+                        <button type="submit" class="button primary-button sign-btn">Proceed</button>
+                    </div>
+                    <div class="col">
+                        <button class="button secondary-button cancel-btn">Cancel</button>
+                    </div>
+                </div>
+                <input asp-for="ReturnUrl" type="hidden" />
+            </form>
+        </div>
+    </div>
+</div>

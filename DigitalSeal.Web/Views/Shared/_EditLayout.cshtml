@@ -1,0 +1,32 @@
+﻿@model BasePageModel
+
+@{
+    Layout = "_Layout";
+}
+
+@section AddEnviroment {
+    <link rel="stylesheet" href="~/css/editPage.css" asp-append-version="true" />
+}
+
+<div class="edit-page" name="edit-form">
+    <div class="toolbar d-flex flex-row justify-content-center">
+        @await RenderSectionAsync("ToolbarButtons", required: false)
+    </div>
+
+    <div class="form-group main-info">
+        <div class="row">
+            @await RenderSectionAsync("Details", required: false)
+        </div>
+    </div>
+
+    <div class="row flex-grow-1">
+        @RenderBody()
+    </div>
+
+    <input asp-for="ReturnUrl" type="hidden" />
+</div>
+
+
+@section Scripts {
+    @await RenderSectionAsync("Scripts", required: false)
+}

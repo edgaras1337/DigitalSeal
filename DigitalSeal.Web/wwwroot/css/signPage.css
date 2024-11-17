@@ -1,0 +1,40 @@
+﻿.sign-page {
+    max-width: 600px;
+    margin: auto;
+}
+
+.sign-form {
+    margin-top: 30px;
+    min-width: 300px;
+    max-width: 800px;
+}
+
+    .sign-form .col {
+        padding: 0;
+    }
+
+        .sign-form .col:nth-child(1) {
+            padding-right: 5px;
+        }
+
+        .sign-form .col:nth-child(2) {
+            padding-left: 5px;
+        }
+
+    .sign-form .buttons button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .sign-form .buttons {
+        margin: 20px 0 0 0;
+    }
+
+.sign-page .selected-docs .doc-names {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.sign-page .selected-docs {
+    text-align: left;
+}

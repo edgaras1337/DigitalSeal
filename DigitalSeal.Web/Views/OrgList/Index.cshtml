@@ -1,0 +1,63 @@
+﻿@using DigitalSeal.Web.Services
+@using Microsoft.AspNetCore.Http.Extensions
+@{
+    ViewData["Title"] = "Organizations";
+    Layout = "_ListPageLayout";
+}
+
+@section Scripts {
+    <script src="~/js/orgList.js" asp-append-version="true" type="module"></script>
+}
+
+@section ToolbarButtons {
+    <button class="fa-icon-button add-button" data-bs-toggle="modal" data-bs-target="#create-org-modal">
+        <i class="fa-solid fa-plus"></i>
+    </button>
+
+    <button class="fa-icon-button edit-button need-selection single" id="edit-button" disabled>
+        <i class="fa-solid fa-pen"></i>
+    </button>
+
+    <button class="fa-icon-button delete-button need-selection" id="delete-button" data-bs-toggle="modal" data-bs-target="#confirm-org-delete-modal" disabled>
+        <i class="fa-solid fa-trash"></i>
+    </button>
+
+    <button class="fa-icon-button delete-button need-selection single" id="set-button" disabled>
+        <i class="fa-solid fa-building-user"></i>
+    </button>
+}
+
+@{
+    var confirmationModal = new ConfirmationModalModel
+            {
+                Id = "confirm-org-delete-modal",
+                Title = "Are you sure you want to delete selected organizations?",
+                Body = "This action is irreversible and will delete all data associated with organizations",
+                MainButtonTitle = "Delete",
+                ButtonType = ButtonType.Danger,
+            };
+}
+<partial name="_ConfirmationModal" model="@confirmationModal" />
+
+
+<div class="modal fade" id="create-org-modal" tabindex="-1" aria-labelledby="create-org-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="create-org-modal-label">Create New Organization</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="create-organization-form" name="create-org" asp-controller="@BaseDSController.ControllerName(nameof(OrgEditController))" asp-action="@nameof(OrgEditController.Create)">
+                    <div>
+                        <label for="Name" class="form-label">Organization Name</label>
+                        <input type="text" class="form-control form-input" id="Name" name="Name" required>
+                        <span class="invalid-feedback">Name is required</span>
+                        <input name="ReturnUrl" value="@Context.Request.GetEncodedPathAndQuery()" type="hidden" />
+                    </div>
+                    <button class="button primary-button form-submit">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

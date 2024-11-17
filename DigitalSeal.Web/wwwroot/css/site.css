@@ -1,0 +1,313 @@
+:root {
+    --background: #F8FAFC;
+    --primary-button: #EEF2FF;
+    --primary-button-hover: var(--brand-20);
+    --primary-button-text: #4F46E5;
+    --secondary-button: #F8FAFC;
+    --secondary-button-hover: #E2E8F0;
+    --secondary-button-text: #475569;
+    --danger-button: #FFF1F2;
+    --danger-button-hover: #FFE4E6;
+    --danger-button-text: #F43F5E;
+    --disabled-button: #F8FAFC;
+    --disabled-button-text: #CBD5E1;
+    --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --brand-5: #EEF2FF;
+    --brand-20: #C7D2FE;
+    --brand-60: #4F46E5;
+    --warning-5: #FFFBEB;
+    --warning-20: #FDE68A;
+    --danger-5: #FFF1F2;
+    --danger-20: #FECDD3;
+    --success-5: #F0FDF4;
+    --success-20: #BBF7D0;
+    --gray-10: #F1F5F9;
+    --gray-20: #E2E8F0;
+    --gray-30: #CBD5E1;
+    --gray-40: #94A3B8;
+    --gray-60: #475569;
+    --gray-80: #1E293B;
+    --default-text: #475569;
+    --muted-text: var(--gray-40);
+    --dark-primary-button: var(--gray-80);
+    --dark-primary-button-hover: #0F172A;
+    --dark-primary-button-text: #FFFFFF;
+    --dark-secondary-button: #FFFFFF;
+    --dark-secondary-button-text: #475569;
+    --dark-secondary-button-hover: #F8FAFC;
+    --dark-secondary-button-border: #CBD5E1;
+    --dark-danger-button: #F43F5E;
+    --dark-danger-button-hover: #E11D48;
+    --dark-danger-button-text: #FFFFFF;
+}
+
+
+html, body {
+    font-family: "Plus Jakarta Sans" !important;
+    font-size: 14px;
+    position: relative;
+    min-height: 100% !important;
+    background: var(--background);
+    color: #4e4e4e;
+}
+
+.app-container {
+    margin-bottom: 60px;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+h2 {
+    font-weight: 800;
+}
+
+.alert {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 20px;
+    margin: 0;
+}
+
+    .alert svg {
+        margin-right: 20px;
+        width: 30px;
+        height: 30px;
+    }
+
+.alert-primary {
+    background: var(--brand-5) !important;
+    border: 1px solid var(--brand-20) !important;
+}
+
+.alert-warning {
+    background: var(--warning-5) !important;
+    border: 1px solid var(--warning-20) !important;
+}
+
+.alert-danger {
+    background: var(--danger-5) !important;
+    border: 1px solid var(--danger-20) !important;
+}
+
+.alert-success {
+    background: var(--success-5) !important;
+    border: 1px solid var(--success-20) !important;
+}
+
+
+.alert span {
+}
+
+.alert .title {
+    font-weight: 600;
+    color: var(--gray-80);
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.alert .description {
+    font-weight: 500;
+    color: var(--gray-60);
+}
+
+.created-by {
+    font-weight: 600;
+}
+
+/*----- NAVBAR -----*/
+
+.navbar {
+    background: white;
+}
+
+    .navbar .dropdown li > a:active {
+        background-color: #e4e4e7;
+        color: black;
+    }
+
+.navbar-brand {
+    font-weight: 800;
+}
+
+.navbar .user-dropdown-text {
+    text-decoration: none !important;
+    font-weight: 600;
+}
+
+/*----------*/
+
+
+
+/* ------------------ DROPDOWN -------------------- */
+
+.dropdown-menu {
+    border: none !important;
+    box-shadow: var(--shadow-lg);
+    border-radius: 16px;
+    padding: 6px;
+    min-width: 200px;
+}
+
+    .dropdown-menu a {
+        border-radius: 8px;
+        color: var(--default-text);
+        height: 40px;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+
+        .dropdown-menu a:not(:first-child):not(:last-child) {
+            margin: 3px;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: var(--background);
+        }
+
+/* -------------------------------------- */
+
+
+/*--------- FOOTER -----------*/
+
+.page-footer {
+    height: 60px !important;
+    display: flex;
+    align-items: center;
+    position: static !important;
+    background: white;
+}
+
+/*--------------------*/
+
+.full-width {
+    width: 100%;
+}
+
+.icon {
+    width: 1.2em !important;
+    height: 1.2em !important;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+
+.notyf__toast {
+    max-width: 500px !important;
+}
+
+    .notyf__toast p:not(:last-child) {
+        margin: 7px 0;
+    }
+
+    .notyf__toast p:last-child {
+        margin-bottom: 3px;
+    }
+
+.no-events {
+    pointer-events: none !important;
+}
+
+.code-group {
+    width: 100%;
+}
+
+
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    .code-group {
+        max-width: 300px;
+        min-width: 250px;
+    }
+
+    .title-input-group {
+        min-width: 250px;
+    }
+
+    .object-info-cards .detail-card:not(:last-child) {
+        margin: 15px 60px 15px 0 !important;
+    }
+}
+
+.organization-page .tab-pane.active,
+.settings-page .tab-pane.active {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.a-nostyle {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.form-group,
+.row {
+    margin: 10px 0;
+}
+
+
+
+.hidden {
+    display: none !important;
+}
+
+
+/* -- NAV TABS -- */
+.nav-tabs {
+    border-bottom: 1px solid var(--gray-20);
+}
+
+    .nav-tabs .nav-link, .nav-tabs .nav-link.active {
+        font-size: 0.9rem;
+        color: var(--default-text) !important;
+        outline: none !important;
+        border: none !important;
+    }
+
+
+        .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+            background: none !important;
+            border-bottom: 1px solid var(--gray-80) !important;
+        }
+
+        .nav-tabs .nav-link.active {
+            background: none !important;
+            border-bottom: 1px solid var(--gray-80) !important;
+        }
+
+        .nav-tabs .nav-link.active {
+            font-weight: 700;
+        }
+/* ---- */
+
+
+
+.toolbar button:not(:last-child) {
+    margin-right: 10px;
+}

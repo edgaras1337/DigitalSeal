@@ -1,0 +1,85 @@
+﻿.fa-icon-button {
+    background: none;
+    border: none;
+    outline: none;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    /*box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+    .fa-icon-button.large {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .fa-icon-button:not(.large) {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    .fa-icon-button.with-title span {
+        display: none;
+    }
+
+@media (min-width: 768px) {
+    .fa-icon-button.with-title span {
+        display: block;
+    }
+
+    .fa-icon-button.with-title {
+        flex-direction: row;
+        border-radius: 50px;
+        padding: 15px 25px;
+        justify-content: left;
+        /* LARGE */
+        margin: 10px 10px;
+        width: auto !important;
+    }
+
+        .fa-icon-button.with-title svg {
+        }
+
+        .fa-icon-button.with-title span {
+            margin-left: 10px;
+            color: var(--gray-40);
+            transition: 0.3s;
+        }
+
+        .fa-icon-button.with-title svg {
+            width: 25px;
+            height: 25px;
+        }
+}
+
+.fa-icon-button:hover:not(:disabled) {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+}
+
+.fa-icon-button:disabled svg {
+    color: var(--gray-20) !important;
+}
+
+.fa-icon-button svg {
+    transition: 0.3s;
+    color: var(--gray-80);
+}
+
+
+.fa-icon-button:hover svg {
+    color: var(--brand-60);
+}
+
+.fa-icon-button:not(:disabled):hover span {
+    color: var(--default-text);
+}
+
+.fa-icon-button svg {
+    width: 50%;
+    height: 50%;
+}

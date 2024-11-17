@@ -1,0 +1,54 @@
+﻿@model DigitalSeal.Web.Models.ViewModels.Account.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Account/_Layout.cshtml";
+}
+
+<h2 class="pt-3">Login</h2>
+<hr />
+<div class="row">
+    <div>
+        <form asp-action="@nameof(AccountController.Login)" class="small-form" name="login-form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" class="form-input" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" class="form-input" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
+                </label>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="button primary-button form-submit">Login</button>
+            </div>
+            <input asp-for="ReturnUrl" type="hidden" />
+        </form>
+    </div>
+    <div>
+        <span>
+            Don't have an account yet?
+            <a asp-action="@nameof(AccountController.Register)">Sign Up</a>
+        </span>
+    </div>
+    <div class="mb-2">
+        <span>
+            <a asp-action="@nameof(AccountController.ForgotPassword)">Forgot password?</a>
+        </span>
+    </div>
+    <hr />
+    <h5 class="mb-3">Login with other services</h5>
+    <div>
+        <a asp-action="@nameof(AccountController.LoginOAuth)" class="button secondary-button google-button">
+            <img src="/images/google.svg" class="icon" />
+            <span>Continue with Google</span>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+﻿@using DigitalSeal.Data.Models
+@using DigitalSeal.Web.Models.ViewModels.Notifications;
+@model NotificationViewModel;
+
+@{
+    ViewData["Title"] = "Notifications";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section AddEnviroment {
+    <link rel="stylesheet" href="~/css/notificationPage.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/notifications.js" asp-append-version="true" type="module"></script>
+}
+
+<div class="notification-page container-fluid">
+    <h2>Notifications</h2>
+    <hr />
+    <div class="container mt-3 position-relative">
+        @if (Model.Notifications.Count == 0)
+        {
+            <h1 class="position-absolute top-50 start-50 translate-middle-x">No notifications</h1>
+        }
+        else
+        {
+            <ul class="list-group notification-list">
+                @foreach (BaseNotificationModel message in Model.Notifications)
+                {
+                    <li class="list-group-item message-container @(message.IsSeen ? "seen-msg" : "new-msg")">
+                        <input id="NotificationID" value="@message.NotificationID" type="hidden" />
+                        <div class="text-container">
+
+                            <div class="title-container">
+                                @if (!message.IsSeen)
+                                {
+                                    <div class="notification-bubble"></div>
+                                }
+                                <h5 class="title">@message.Title</h5>
+                            </div>
+                            <div>
+                                @if (message is PlainTextNotificationModel plainTextModel)
+                                {
+                                    <div class="html-content">@Html.Raw(plainTextModel.Content)</div>
+                                }
+                                else if (message is InvitationNotificationModel inviteModel)
+                                {
+                                    <div class="my-3 invite-buttons @(inviteModel.State != InviteNotificationState.Pending ? "hidden" : "")">
+                                        <a href="@inviteModel.AcceptLink" class="a-nostyle button primary-button accept-invite">Accept</a>
+                                        <a href="@inviteModel.DeclineLink" class="a-nostyle button danger-button decline-invite">Decline</a>
+                                    </div>
+                                    <p class="my-2 text-success accepted-text @(inviteModel.State != InviteNotificationState.Accepted ? "hidden" : "")">Invitation was accepted</p>
+                                    <p class="my-2 text-danger declined-text @(inviteModel.State != InviteNotificationState.Declined ? "hidden" : "")">Invitation was declined</p>
+                                }
+                            </div>
+                        </div>
+                        <div class="sender-container">
+                            <div class="pe-3">
+                                <p class="mb-1">@message.SenderName</p>
+                                <p class="mb-1 utc-date">@message.SentDate</p>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+
+    </div>
+
+</div>

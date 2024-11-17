@@ -1,0 +1,80 @@
+﻿.ag-theme-quartz {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+}
+
+.ag-center-cols-container {
+    min-width: 100%;
+}
+
+.grid-row-positive {
+    background: #f0fdf4 !important;
+}
+
+    .grid-row-positive.ag-row-selected {
+        background: #dcfce7 !important;
+    }
+
+.grid-row-negative {
+    background: #fef2f2 !important;
+}
+
+    .grid-row-negative.ag-row-selected {
+        background: #fee2e2 !important;
+    }
+
+
+.grid-row-primary {
+    background: #e1f5fe !important;
+}
+
+    .grid-row-primary.ag-row-selected {
+        background: #b3e5fc !important;
+    }
+
+.grid-row-warning {
+    background: #fff9c4 !important;
+}
+
+    .grid-row-warning.ag-row-selected {
+        background: #fff59d !important;
+    }
+
+.grid-row-default {
+}
+
+    .grid-row-default.ag-row-selected {
+    }
+
+.grid-row-negative {
+    background: #fef2f2 !important;
+}
+
+    .grid-row-negative.ag-row-selected {
+        background: #fee2e2 !important;
+    }
+
+.data-grid {
+    min-height: 400px;
+}
+
+.table-wrapper .data-grid {
+    height: 100%;
+    width: 100%;
+}
+
+.modal-grid-container .data-grid {
+    height: 500px;
+}
+
+@media (min-width: 992px) {
+    .modal-grid-container .modal-dialog,
+    .modal-grid-container .modal-content {
+        width: 800px !important;
+        max-width: 800px !important;
+    }
+}
+
+.modal-grid-container .modal-footer {
+    display: flex;
+    justify-content: center;
+}

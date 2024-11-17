@@ -1,0 +1,84 @@
+﻿.editable-input .wrapper {
+    width: 100%;
+}
+
+.editable-input .validation-text {
+    position: absolute;
+    left: 0;
+    bottom: -1.2rem;
+}
+
+.editable-input .fa-icon-button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px !important;
+    height: 40px !important;
+}
+
+.info-label {
+    font-weight: 700;
+    color: var(--gray-80);
+}
+
+.editable-input {
+    width: 100%;
+}
+
+    .editable-input .fa-icon-button:hover {
+        box-shadow: none !important;
+    }
+
+    .editable-input .save-button {
+        right: 35px;
+    }
+
+    .editable-input .input-container {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex: 1;
+    }
+
+    .editable-input .validation-text {
+        position: absolute;
+    }
+
+
+.hidden {
+    display: none !important;
+}
+
+.editable-input form input {
+    width: 100%;
+}
+
+.editable-input form {
+    width: 85%;
+}
+
+
+@media (min-width: 768px) {
+    .info-label {
+        width: 200px;
+    }
+
+    .editable-input .wrapper {
+        width: auto;
+    }
+
+    .editable-input form {
+        width: 400px;
+    }
+
+    .editable-input .fa-icon-button {
+        right: -60px;
+    }
+
+    .editable-input .cancel-edit-button {
+        right: -110px;
+    }
+}

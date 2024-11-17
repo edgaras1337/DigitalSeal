@@ -1,0 +1,39 @@
+﻿@using DigitalSeal.Web.Models.ViewModels
+
+@{
+    Layout = "_Layout";
+}
+
+@section AddEnviroment {
+    @* <link rel="stylesheet" href="~/css/listPage.css" asp-append-version="true" /> *@
+}
+
+@model ListPageModel
+
+<div class="list-page doc-list-page container-fluid h-100">
+    <div class="d-flex flex-column h-100">
+        <div>
+            <h2>@ViewData["Title"]</h2>
+            <hr />
+        </div>
+
+        <main class="flex-grow-1 d-flex flex-column">
+            <div id="primary-list-container" class="d-flex flex-column flex-grow-1">
+                <div class="toolbar d-flex flex-row">
+                    @RenderSection("ToolbarButtons", required: false)
+                </div>
+                <div class="table-wrapper mt-2 h-100 w-100">
+                    <div id="primary-list" class="ag-theme-quartz data-grid" data-column-defs="@Model.ColumnDefs"></div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+
+@RenderBody()
+
+@section Scripts {
+    @RenderSection("Scripts")
+}

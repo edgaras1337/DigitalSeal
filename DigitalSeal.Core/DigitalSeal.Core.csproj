@@ -1,0 +1,104 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
+    <PackageReference Include="NETCore.MailKit" Version="2.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="7.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalSeal.Data\DigitalSeal.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\ListProviders\DocPartyList\DocPartyListProvider.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DocPartyListProvider.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\ListProviders\Signatures\SignaturesListProvider.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SignaturesListProvider.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Services\DocPartyService.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DocPartyService.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Services\DocService.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DocService.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Services\InvitationService.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>InvitationService.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Services\OrgService.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OrgService.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Services\SignatureService.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SignatureService.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Services\SharedResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SharedResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ListProviders\DocPartyList\DocPartyListProvider.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DocPartyListProvider.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ListProviders\Signatures\SignaturesListProvider.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SignaturesListProvider.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Services\DocPartyService.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DocPartyService.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Services\DocService.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DocService.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Services\InvitationService.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>InvitationService.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Services\OrgService.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>OrgService.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Services\SignatureService.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SignatureService.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Services\SharedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SharedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Utilities\" />
+  </ItemGroup>
+
+</Project>

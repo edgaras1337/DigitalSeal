@@ -1,0 +1,18 @@
+﻿@using DigitalSeal.Web.Models.ViewModels.Account
+@model EmailConfirmationModel
+@{
+    ViewData["Title"] = "Confirm Email";
+    Layout = "~/Views/Account/_Layout.cshtml";
+}
+
+@section Scripts {
+    <script src="~/js/emailConfirmationPage.js" asp-append-version="true" type="module"></script>
+}
+
+<div id="confirm-email-page">
+    <h2 class="pt-3">Confirm Email</h2>
+    <hr />
+    <h6 class="mb-4">We have sent you a confirmation link to your email. Please open it to confirm your email address.</h6>
+    <partial name="_SendAgainPartial" />
+    <input id="email" value=@Model.Email type="hidden" />
+</div>

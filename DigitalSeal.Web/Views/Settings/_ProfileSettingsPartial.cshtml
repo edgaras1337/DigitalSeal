@@ -1,0 +1,125 @@
+﻿@using System.Web
+@using DigitalSeal.Core.Extensions
+@model DigitalSeal.Web.Models.ViewModels.Settings.SettingsViewModel;
+
+<div class="w-100">
+
+    <div class="container-fluid settings-form">
+        <nav>
+            <div class="nav nav-tabs" id="page-tab" role="tablist">
+                <button data-index="0" class="nav-link active" id="nav-details-link" data-bs-toggle="tab" data-bs-target="#nav-details-tab" type="button" role="tab" aria-controls="nav-details-tab" aria-selected="false">Details</button>
+                @if (Model.HasPassword)
+                {
+                    <button data-index="1" class="nav-link" id="nav-password-link" data-bs-toggle="tab" data-bs-target="#nav-password-tab" type="button" role="tab" aria-controls="nav-password-tab" aria-selected="false">Change Password</button>
+                }
+                @if (!Model.IsAdmin)
+                {
+                    <button data-index="2" class="nav-link" id="nav-deactivate-link" data-bs-toggle="tab" data-bs-target="#nav-deactivate-tab" type="button" role="tab" aria-controls="nav-deactivate-tab" aria-selected="false">Deactivate Account</button>
+                }
+            </div>
+
+        </nav>
+        <div class="tab-content d-flex flex-grow-1" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-details-tab" role="tabpanel" aria-labelledby="nav-details-link">
+
+                <form icon="update-profile-form" class="settings-form" name="update-profile" asp-action="UpdateProfile">
+                    <input asp-for="HasPassword" type="hidden" />
+                    <input asp-for="IsAdmin" type="hidden" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-row">
+                        <div class="row m-0">
+                            <div class="form-group col-md-6 p-0 pe-md-1">
+                                <label asp-for="FirstName" class="control-label">First Name</label>
+                                <input asp-for="FirstName" class="form-control" disabled />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6 p-0 ps-md-1">
+                                <label asp-for="LastName" class="control-label">Last Name</label>
+                                <input asp-for="LastName" class="form-control" disabled>
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <span class="invalid-feedback">Field is required</span>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="toggle-container">
+                            <div class="toggle-button">
+                                <input type="checkbox" asp-for="Is2FAEnabled" class="mobileToggle form-input">
+                                <label asp-for="Is2FAEnabled" />
+                            </div>
+                            <p>Two-Factor Authentication</p>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label">Email</label>
+                        <input asp-for="Email" class="form-control form-input" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        @* <dsx-button state="Positive" class="form-submit" type="button" title="Save Changes" disabled /> *@
+                        <simple-button title="Save Changes" button-type="Primary" class="form-submit" disabled />
+                    </div>
+                </form>
+
+                @if (!Model.IsAdmin)
+                {
+
+                }
+            </div>
+
+            @if (Model.HasPassword)
+            {
+                <div class="tab-pane fade show" id="nav-password-tab" role="tabpanel" aria-labelledby="nav-password-link">
+
+                    <form icon="update-password-form" class="settings-form" name="update-password" asp-action="UpdateProfile">
+                        <div class="form-group">
+                            <label asp-for="CurrentPassword" class="control-label">Current Password</label>
+                            <input asp-for="CurrentPassword" class="form-control form-input password-input" />
+                            <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NewPassword" class="control-label">New Password</label>
+                            <input asp-for="NewPassword" class="form-control form-input password-input" />
+                            <span asp-validation-for="NewPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword" class="control-label">Confirm Password</label>
+                            <input asp-for="ConfirmPassword" class="form-control form-input password-input" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            @* <dsx-button state="Positive" class="form-submit" type="button" title="Save Changes" disabled /> *@
+                            <simple-button title="Save Changes" button-type="Primary" class="form-submit" disabled />
+                        </div>
+                    </form>
+                </div>
+            }
+
+            @if (!Model.IsAdmin)
+            {
+                var confirmationModel = new ConfirmationModalModel
+                {
+                    Id = "confirm-deactivation-modal",
+                    Title = "Are you sure you want to delete your account?",
+                    Body = "This action is irreversible and will delete all data associated with your account.",
+                    MainButtonTitle = "Deactivate",
+                    ButtonType = ButtonType.Danger,
+                };
+
+                <partial name="_ConfirmationModal" model="confirmationModel" />
+                <div class="tab-pane fade show" id="nav-deactivate-tab" role="tabpanel" aria-labelledby="nav-deactivate-link">
+                    <p class="mt-2">Delete your account and all data associated with it.</p>
+                    <p class="me-2">All documents and other personal data will be deleted without the ability to recover it. Make sure important documents are saved.</p>
+                    <div>
+                        <button class="button danger-button" data-bs-toggle="modal" data-bs-target="#confirm-deactivation-modal">Deactivate account</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

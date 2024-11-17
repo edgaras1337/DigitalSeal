@@ -1,0 +1,75 @@
+﻿.message-container {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+}
+
+.text-container {
+    flex-grow: 1;
+}
+
+
+.notification-page .sender-container {
+    width: 100%;
+    text-wrap: nowrap;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+}
+
+.title {
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .notification-page .sender-container {
+        border-left: 1px solid #ced4da;
+        border-bottom: none;
+        width: 12.5rem !important;
+        padding-left: 1rem;
+        margin-bottom: 0;
+    }
+
+    .title {
+        margin-bottom: 0.5rem;
+    }
+
+    .message-container {
+        flex-direction: row;
+    }
+}
+
+
+.notification-page .html-content p {
+    margin: 0;
+}
+
+.notification-list li {
+    background: none;
+}
+
+.new-msg .title {
+    font-weight: 800;
+}
+
+.notification-list .list-group-item {
+    border: none;
+    border-bottom: 1px solid var(--gray-20);
+    padding: 20px 0;
+}
+
+
+.notification-bubble {
+    background: var(--brand-60);
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    position: absolute;
+    left: -1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.title-container {
+    position: relative;
+}
